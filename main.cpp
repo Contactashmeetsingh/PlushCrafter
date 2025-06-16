@@ -5,3 +5,6 @@ int main() {
     app.run();
     return 0;
 }
+
+//g++ main.cpp Application.cpp PlushBear.cpp -o plushapp
+//.\pluishapp
