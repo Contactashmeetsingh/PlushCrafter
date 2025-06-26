@@ -2,32 +2,45 @@
 #include <iostream>  // You need this for cout
 
 #include "PlushBear.h"
+#include "BearStorage.h"
 
 
 using namespace std;
 
 Application::Application(){
     cout<<"hello world"<<endl;
+
 }
 void Application::createBear(){
     PlushBear newBear;
     newBear.customize();
     newBear.display();
     bear.push_back(newBear);
+    BearStorage storage;
+    storage.saveBearsToFile(bear);         // When a bear is created
+
+    
 }
 void Application::bearList() const{
-    for(int i=0; i<bear.size();i++){
-        std::cout<< i+1<<"."<<bear[i].getName()<<endl;
+    BearStorage storage;
+    auto loadedBears = storage.loadBearsFromFile();
+
+    for(int i=0; i<loadedBears.size();i++){
+        std::cout<< i+1<<"."<<loadedBears[i].getName()<<endl;
     }
+  // bearList = BearStorage::loadBears(); // When app starts or View Bear is selected
+
 }
 void Application::viewBearByIndex() const{
+    BearStorage storage;
+    std::vector<PlushBear> loadedBears = storage.loadBearsFromFile();
     int index;
     std::cout<< "Please insert the index number of the bear"<<endl;
     std::cin>>index;
-    if(index>0&& index<bear.size()){
-        bear[index-1].display();
+    if(index>0&& index<=loadedBears.size()){
+        loadedBears[index-1].display();
     }
-    cout<<"invald index";
+    else(cout<<"invald index");
 }
 void Application::run(){
     std::cout << "Welcome to PlushCrafter!\n";

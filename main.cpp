@@ -6,5 +6,5 @@ int main() {
     return 0;
 }
 
-//g++ main.cpp Application.cpp PlushBear.cpp -o plushapp
-//.\pluishapp
+//g++ main.cpp Application.cpp PlushBear.cpp BearStorage.cpp -o plushapp
+//.\plushapp

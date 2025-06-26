@@ -45,6 +45,30 @@ void PlushBear::display() const {
         std::cout << "No accessories added.\n";
     }
 }
-std::string PlushBear::getName() const{
-    return name;
-}
+ // Getters
+    std::string PlushBear::getName() const {
+        return name; 
+    }
+    std::string PlushBear::getColor() const { 
+        return color; 
+    }
+    std::string PlushBear::getSize() const { 
+        return bearSize; 
+    }
+    std::vector<std::string> PlushBear::getAccessories() const { 
+        return accessories; 
+    }
+
+    // Setters for loading
+    void PlushBear::setName(const std::string& n) { 
+        name = n; 
+    }
+    void PlushBear::setColor(const std::string& c) {
+        color = c; 
+        }
+    void PlushBear::setSize(const std::string& s) { 
+        bearSize = s; 
+    }
+    void PlushBear::setAccessories(const std::vector<std::string>& acc) { 
+        accessories = acc; 
+    }

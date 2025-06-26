@@ -14,7 +14,18 @@ private:
 public:
     void customize();
     void display() const;
-    std::string getName() const;
+    // Getters
+    std::string getName() const ;
+    std::string getColor() const ;
+    std::string getSize() const ;
+    std::vector<std::string> getAccessories() const ;
+
+    // Setters for loading
+    void setName(const std::string& n);
+    void setColor(const std::string& c) ;
+    void setSize(const std::string& s);
+    void setAccessories(const std::vector<std::string>& acc) ;
+
 };
 
 #endif
