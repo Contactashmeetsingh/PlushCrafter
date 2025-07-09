@@ -28,6 +28,32 @@ void Application::bearList() const{
     for(int i=0; i<loadedBears.size();i++){
         std::cout<< i+1<<"."<<loadedBears[i].getName()<<endl;
     }
+    std::cout<<"would you like to delete any bears? YES or NO"<<endl;
+    string deletechoice;
+    std::cin>>deletechoice;
+    if(deletechoice=="no"){
+        return;
+    }
+    else if(deletechoice=="yes"){
+        int index;
+        string theChosenOne;
+        std::cout<< "Please insert the index number of the bear"<<endl;
+        std::cin>>index;
+        if(index>0&& index<=loadedBears.size()){
+             theChosenOne=loadedBears[index-1].getName();
+            std::cout<<theChosenOne<<endl;
+            storage.deleteBearsFromFile(theChosenOne);
+            //std::cout<<"this is deleted now"<<endl;
+            std::cout<<"The list now::"<<endl;
+            auto updatedBears = storage.loadBearsFromFile(); 
+            for(int i=0; i<loadedBears.size();i++){
+                std::cout<< i+1<<"."<<updatedBears[i].getName()<<endl;
+            }
+
+        }
+        else(cout<<"invald index");
+    }
+    else(cout<<"invald index");
   // bearList = BearStorage::loadBears(); // When app starts or View Bear is selected
 
 }

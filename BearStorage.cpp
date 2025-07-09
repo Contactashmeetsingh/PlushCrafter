@@ -20,8 +20,39 @@ void BearStorage::saveBearsToFile( const std::vector<PlushBear>& Bear ){
         filename.close();
     }
 }
+std::vector<PlushBear> BearStorage::deleteBearsFromFile ( std::string& bearBoutToGetDeleted){
+    std::vector<PlushBear> allBears = loadBearsFromFile();  // Read all bears
+    std::vector<PlushBear> filteredBears;
+     for (int i = 0; i < allBears.size(); i++) {
+        if (allBears[i].getName() != bearBoutToGetDeleted) {
+            filteredBears.push_back(allBears[i]);
+        }
+    }
+    std::ofstream fileName("Storage.txt", std::ios::app);
+    if (!fileName) ;//return bears;
+    
+   /* for(int i =0; i< filteredBears.size();i++){
+        if(allBears.getName()!=bearBoutToGetDeleted){
+            fileSave.push_back(bear);
+        }
+    }*/
+    for (int i = 0; i < filteredBears.size(); i++) {
+    fileName << filteredBears[i].getName() << '\n';
+    fileName << filteredBears[i].getSize() << '\n';
+    fileName << filteredBears[i].getColor() << '\n';
+
+    const auto& acc = filteredBears[i].getAccessories();
+    fileName << acc.size() << '\n';
+    for (const std::string& item : acc) {
+        fileName << item << '\n';
+    }
+    fileName << "----\n";
+    }
+    fileName.close();
+    return filteredBears;
+}
 std::vector<PlushBear> BearStorage::loadBearsFromFile (){
-    std::ifstream filename("Storage.txt", std::ios::app);
+    std::ifstream filename("Storage.txt");
     std::vector<PlushBear> bears;
     if (!filename) return bears;
     std::string line;
@@ -49,6 +80,6 @@ std::vector<PlushBear> BearStorage::loadBearsFromFile (){
         std::getline(filename, line); // Read and ignore delimiter line
         bears.push_back(bear);
     }
-        filename.close();
-        return bears;
+    filename.close();
+    return bears;
 }
