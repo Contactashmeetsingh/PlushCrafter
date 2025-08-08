@@ -41,7 +41,7 @@ void Application::bearList() const{
         std::cin>>index;
         if(index>0&& index<=loadedBears.size()){
              theChosenOne=loadedBears[index-1].getName();
-            std::cout<<theChosenOne<<endl;
+            std::cout<<"Deleted bear: "<<theChosenOne<<endl;
             storage.deleteBearsFromFile(theChosenOne);
             //std::cout<<"this is deleted now"<<endl;
             std::cout<<"The list now::"<<endl;

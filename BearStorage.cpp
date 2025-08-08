@@ -28,14 +28,9 @@ std::vector<PlushBear> BearStorage::deleteBearsFromFile ( std::string& bearBoutT
             filteredBears.push_back(allBears[i]);
         }
     }
-    std::ofstream fileName("Storage.txt", std::ios::app);
+    std::ofstream fileName("Storage.txt", std::ios::trunc);
     if (!fileName) ;//return bears;
-    
-   /* for(int i =0; i< filteredBears.size();i++){
-        if(allBears.getName()!=bearBoutToGetDeleted){
-            fileSave.push_back(bear);
-        }
-    }*/
+   
     for (int i = 0; i < filteredBears.size(); i++) {
     fileName << filteredBears[i].getName() << '\n';
     fileName << filteredBears[i].getSize() << '\n';
@@ -52,34 +47,43 @@ std::vector<PlushBear> BearStorage::deleteBearsFromFile ( std::string& bearBoutT
     return filteredBears;
 }
 std::vector<PlushBear> BearStorage::loadBearsFromFile (){
-    std::ifstream filename("Storage.txt");
+      std::ifstream filename("Storage.txt");
     std::vector<PlushBear> bears;
+
     if (!filename) return bears;
+
     std::string line;
-    while(std::getline(filename, line)){
+    while (std::getline(filename, line)) {
         PlushBear bear;
         bear.setName(line);
 
-        std::getline(filename, line);
+        if (!std::getline(filename, line)) break;
         bear.setColor(line);
 
-        std::getline(filename, line);
+        if (!std::getline(filename, line)) break;
         bear.setSize(line);
 
-        std::getline(filename, line);
-        int count = std::stoi(line);
-        
-        std::vector<std::string> acc;
-        for (int i = 0; i < count; ++i) {
-            std::getline(filename, line);
-            acc.push_back(line);
+        if (!std::getline(filename, line)) break;
+
+        int count = 0;
+        try {
+            count = std::stoi(line);
+        } catch (...) {
+            std::cerr << "Warning: Failed to parse accessory count. Skipping bear.\n";
+            break; // or use continue to skip this bear
         }
 
+        std::vector<std::string> acc;
+        for (int i = 0; i < count; i++) {
+            if (!std::getline(filename, line)) break;
+            acc.push_back(line);
+        }
         bear.setAccessories(acc);
 
-        std::getline(filename, line); // Read and ignore delimiter line
+        std::getline(filename, line); // skip "----"
         bears.push_back(bear);
     }
+
     filename.close();
     return bears;
 }

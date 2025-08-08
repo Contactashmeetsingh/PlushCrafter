@@ -30,3 +30,20 @@
 *.exe
 *.out
 *.app
+# Qt Creator user files
+*.user
+*.pro.user
+*.autosave
+
+# CMake build dirs/files
+/build*/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+Makefile
+*.cmake
+compile_commands.json
+install_manifest.txt
+
+# VS Code
+.vscode/
